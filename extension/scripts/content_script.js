@@ -1,33 +1,63 @@
-function start() {
-	midcont = document.getElementById("comic");
-	if(midcont){
-		image = midcont.getElementsByTagName("img")[0];
-		if(image){
-			div = document.createElement("div");
-			div.setAttribute("style",(settings.mouseOver?"display:none;":"")+"padding: 5px;"+(!settings.white?"background:black;"+(settings.top?"margin-bottom:20px;":"")+"color:white;":"color:black;")+"position: relative; top: 5px;font-size:"+(settings.size||"16")+"px;")
+function setCaption(settings) {
+	var midCont = document.getElementById("comic");
+	if (midCont) {
+		var image = midCont.getElementsByTagName("img")[0];
+		if (image) {
+			// Create and style the caption element.
+			captionDiv = document.createElement("div");
+			captionDiv.style.padding = '5px';
+			settings.fontSize = Math.max(settings.fontSize, MIN_FONT_SIZE);
+			settings.fontSize = Math.min(settings.fontSize, MAX_FONT_SIZE);
+			captionDiv.style.fontSize = settings.fontSize + 'px';
 			
-				
-			div.innerHTML = image.getAttribute("title");
-			if(image.nextSibling){
-				image.parentNode.insertBefore(div,settings.top?image:image.nextSibling);
+			if (settings.mouseOver) {
+				captionDiv.style.display = 'none';
 			}
-			else{
-				if(settings.top)
-					image.parentNode.insertBefore(div,image);
-				else
-					image.parentNode.appendChild(div);
+			
+			if (settings.bgColor === 'white') {
+				captionDiv.style.color = 'black';
+			} else if (settings.bgColor === 'black') {
+				captionDiv.style.backgroundColor = 'black';
+				captionDiv.style.color = 'white';
 			}
-			image.setAttribute("title","");
-			if(settings.mouseOver){
-				image.addEventListener("mouseover",function(d){return function(){d.style.display="";settings.top&&window.scrollBy(0,d.offsetHeight+20);};}(div));
-				image.addEventListener("mouseout",function(d){return function(){settings.top&&window.scrollBy(0,-d.offsetHeight-20);d.style.display="none";};}(div));
+			
+			if (settings.captionPos === 'top') {
+				captionDiv.style.marginBottom = '20px';
+			}
+			//position: relative; top: 5px;
+			
+			// Fetch the caption text.
+			captionDiv.innerHTML = image.getAttribute("title");
+			
+			// Insert the caption element.
+			if (image.nextSibling) {
+				image.parentNode.insertBefore(captionDiv,
+					settings.captionPos === 'top'? image : image.nextSibling);
+			} else {
+				if (settings.captionPos === 'top') {
+					image.parentNode.insertBefore(captionDiv, image);
+				} else {
+					image.parentNode.appendChild(captionDiv);
+				}
+			}
+			
+			// Add mouse listeners if the user set that option.
+			if (settings.mouseOver) {
+				image.addEventListener('mouseover', function () {
+					captionDiv.style.display="";
+					if (settings.captionPos === 'top') {
+						window.scrollBy(0, captionDiv.offsetHeight + 20);
+					}
+				}, false);
+				image.addEventListener('mouseout', function () {
+					if (settings.captionPos === 'top') {
+						window.scrollBy(0, -captionDiv.offsetHeight - 20);
+					}
+					captionDiv.style.display = 'none';
+				}, false);
 			}
 		}
 	}
 }
 
-function fillSettings(response){
-	settings = response.settings;
-	start();
-}
-chrome.extension.sendMessage({settings:true},fillSettings);
+chrome.storage.sync.get(DEFAULTS, setCaption);

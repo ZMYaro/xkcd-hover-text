@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Options - xkcd Hover Text</title>
+		<link rel="stylesheet" type="text/css" href="styles/options.css" />
+		<link rel="stylesheet" type="text/css" href="styles/options-widgets.css" />
+		<script type="text/javascript" src="scripts/shared.js"></script>
+		<script type="text/javascript" src="scripts/options-setup.js"></script>
+		<script type="text/javascript" src="scripts/options.js"></script>
+	</head>
+	<body>
+		<nav class="sideBar">
+			<h1>Chrome</h1>
+			<ul>
+				<li><a href="chrome://history" target="_blank">History</a></li>
+				<li>
+					<a href="chrome://extensions">Extensions</a>
+					<ul>
+						<li>xkcd Hover Text</li>
+					</ul>
+				</li>
+				<li><a href="chrome://settings">Settings</a></li>
+				<li><a href="chrome://help">Help</a></li>
+			</ul>
+		</nav>
+		<header>
+			<h1>xkcd Hover Text</h1>
+		</header>
+		<section>
+			<h3>Display options</h3>
+			<p>
+				<label for="mouseOver">
+					<input type="checkbox" id="mouseOver" disabled="disabled" />
+					Only show on mouse hover
+				</label>
+			</p>
+			
+			<p>
+				Background color:&nbsp;
+				<select id="bgColor" disabled="disabled">
+					<option value="black">Black</option>
+					<option value="white" selected="selected">White</option>
+				</select>
+			</p>
+			
+			<p>
+				Font size:&nbsp;
+				<input type="number" id="fontSize" value="16" min="1" max="100" disabled="disabled" />
+			</p>
+			
+			<p>
+				Caption position:&nbsp;
+				<select id="captionPos" disabled="disabled">
+					<option value="bottom" selected="selected">Bottom</option>
+					<option value="top">Top</option>
+				</select>
+			</p>
+		</section>
+<!--
+White background:
+<input type="checkbox" id="white"><br>
+Font size:
+<input type="text" id="size" value="16" size="1" onKeyUp="checkSize()"><br>
+Position:
+<select id="pos">
+	<option value="0">Bottom</option>
+	<option value="1">Top</option>
+</select>
+-->
+		<section>
+			<h3>About</h3>
+			<p id="versionNumber"></p>
+			<p>xkcd Hover Text was created by <a href="https://plus.google.com/+FirtinaOzbalikci" target="_blank">Firtina Ozbalikci</a>; version 2.0 was developed by <a href="http://zmyaro.com" target="_blank">Zachary Yaro</a>.</p>
+			<p>Please consider <a href="https://chrome.google.com/webstore/detail/jloffiajkoafahimojbcaknakngebhaa/reviews" target="_blank">rating this extension</a>.</p>
+			<p>The source code is available <a href="https://github.com/zmyaro/xkcd-hover-text" target="_blank">on GitHub</a>.</p>
+		</section>
+	</body>
+</html>

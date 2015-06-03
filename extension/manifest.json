@@ -8,10 +8,9 @@
 		"48": "images/icon48.png",
 		"128": "images/icon128.png"
 	},
-	"background": {
-		"scripts": ["scripts/background.js"],
-		"persistent": false
-	},
+	"permissions": [
+		"storage"
+	],
 	"content_scripts": [
 		{
 			"matches": [
@@ -20,9 +19,12 @@
 				"http://www.xkcd.com/*",
 				"http://www.xkcd.org/*"
 			],
-			"js": ["scripts/content_script.js"],
+			"js": [
+				"scripts/shared.js",
+				"scripts/content_script.js"
+			],
 			"run_at": "document_end"
 		}
 	],
-	"options_page": "options.html"
+	"options_page": "options_page.html"
 }
