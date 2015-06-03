@@ -30,4 +30,4 @@ function fillSettings(response){
 	settings = response.settings;
 	start();
 }
-chrome.extension.sendRequest({settings:true},fillSettings);
+chrome.extension.sendMessage({settings:true},fillSettings);
