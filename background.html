@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			chrome.extension.onRequest.addListener(
+				function(request, sender, sendResponse) {
+					if(request.settings){
+						var settings = {};
+						for(var i in localStorage){
+							settings[i] = localStorage[i];
+						}
+						sendResponse({"settings":settings});
+					}					
+				}
+			);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
