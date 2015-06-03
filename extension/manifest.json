@@ -1,5 +1,4 @@
 {
-	"update_url":"http://clients2.google.com/service/update2/crx",
 	"version": "1.6",
 	"name": "xkcd Subtext",
 	"content_scripts": [
@@ -10,14 +9,16 @@
 				"http://www.xkcd.com/*",
 				"http://www.xkcd.org/*"
 			],
-			"js": ["xkcds.js"],
+			"js": ["scripts/xkcds.js"],
 			"run_at": "document_end"
 		}
 	],
-	"icons": { "16": "icon16.png",
-           "32": "icon32.png",
-           "48": "icon48.png",
-          "128": "icon128.png" },
+	"icons": {
+		"16": "images/icon16.png",
+		"32": "images/icon32.png",
+		"48": "images/icon48.png",
+		"128": "images/icon128.png"
+	},
 	"options_page": "options.html",
-	"background_page": "background.html"
+	"background_page": "scripts/background.html"
 }
