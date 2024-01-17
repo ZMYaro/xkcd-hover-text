@@ -14,10 +14,10 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"http://xkcd.com/*",
-				"http://xkcd.org/*",
-				"http://www.xkcd.com/*",
-				"http://www.xkcd.org/*"
+				"*://xkcd.com/*",
+				"*://xkcd.org/*",
+				"*://www.xkcd.com/*",
+				"*://www.xkcd.org/*"
 			],
 			"js": [
 				"scripts/shared.js",
